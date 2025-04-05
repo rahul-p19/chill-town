@@ -1,0 +1,26 @@
+[
+  {
+    "path":"assets/player",
+    "files":[
+      {
+        "type":"spritesheet",
+        "key":"BASIC_MALE_DARK",
+        "url":"dark-male.png",
+        "frameConfig":{
+          "frameWidth":32,
+          "frameHeight":32
+        }
+      }
+    ]
+  },
+  {
+    "path":"assets/room",
+    "files":[
+      {
+        "type":"image",
+        "key":"ROOM",
+        "url":"room.png"
+      }
+    ]
+  }
+]
