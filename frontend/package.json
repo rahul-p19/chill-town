@@ -9,7 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+<<<<<<< HEAD
+    "@clerk/nextjs": "^6.13.0",
+=======
     "colyseus.js": "^0.16.15",
+>>>>>>> f1f877659b1a16d96f3d5adff7e1b7164a681fc9
     "next": "15.2.4",
     "phaser": "^3.88.2",
     "react": "^19.0.0",
