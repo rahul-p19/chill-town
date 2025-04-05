@@ -97,6 +97,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     if (!isPhysicsArcadeBody(this.body)) {
       return;
     }
-    this.body.velocity.normalize().scale(80);
+    this.body.velocity.normalize().scale(300);
   }
 }

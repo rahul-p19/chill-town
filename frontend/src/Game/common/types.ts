@@ -5,3 +5,4 @@ export enum DIRECTIONS {
   LEFT = "left",
   RIGHT = "right"
 }
+export type GameObject = Phaser.GameObjects.Sprite | Phaser.GameObjects.Image;

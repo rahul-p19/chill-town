@@ -1,5 +1,6 @@
 export const ASSET_KEYS = {
-  PLAYER: "BASIC_MALE_DARK"
+  PLAYER: "BASIC_MALE_DARK",
+  ROOM: "ROOM"
 }
 export const PLAYER_ANIMATION_KEYS = {
   IDLE_DOWN: "idle_down",

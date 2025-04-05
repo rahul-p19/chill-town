@@ -2,10 +2,13 @@ import { SCENE_KEYS } from "./SceneKeys";
 import { Player } from "../game-objects/Players/player";
 import { ASSET_KEYS, PLAYER_ANIMATION_KEYS } from "../common/assets";
 import { KeyboardComponent } from "../components/input/keyboard-component";
+import { Room } from "../game-objects/Rooms/room";
+import { register } from "module";
 
 export class GameScene extends Phaser.Scene {
   #player!: Player;
   #controls !: KeyboardComponent;
+  #roomGroup !: Phaser.GameObjects.Group;
   constructor() {
     super({
       key: SCENE_KEYS.GAME_SCENE
@@ -27,7 +30,27 @@ export class GameScene extends Phaser.Scene {
       texture: ASSET_KEYS.PLAYER,
       frame: 0
     });
+
+    this.#roomGroup = this.physics.add.group([
+      new Room({
+        scene: this,
+        position: { x: this.scale.width / 2, y: this.scale.height / 2 },
+        texture: ASSET_KEYS.ROOM,
+      })
+    ]);
     this.setAnimations();
+    this.#registerColliders();
+  }
+  #registerColliders() {
+    this.#player.setCollideWorldBounds(true);
+    this.#roomGroup.getChildren().forEach(room => {
+      const modifiedRoom = room as Phaser.Physics.Arcade.Image;
+      modifiedRoom.setImmovable(true);
+      modifiedRoom.setCollideWorldBounds(true);
+    })
+    this.physics.add.collider(this.#player, this.#roomGroup, (player: any, room: any) => {
+      console.log("hit")
+    });
   }
   setAnimations() {
     let rep = 1;

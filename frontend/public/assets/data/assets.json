@@ -12,5 +12,15 @@
         }
       }
     ]
+  },
+  {
+    "path":"assets/room",
+    "files":[
+      {
+        "type":"image",
+        "key":"ROOM",
+        "url":"room.png"
+      }
+    ]
   }
 ]
