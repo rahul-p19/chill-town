@@ -1,0 +1,13 @@
+[
+  {
+    "pack":{
+      "files":[
+        {
+          "type":"image",
+          "key":"basic-male-player",
+          "url":"assets/player/male-basic.png",
+        }
+      ]
+    }
+  }
+]
