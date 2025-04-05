@@ -16,6 +16,9 @@ export class GameScene extends Phaser.Scene {
   }
   preload() {
     console.log("game loaded")
+    this.load.image("botany", "assets/world/botanic.png");
+    this.load.image("room", "assets/world/truck.png");
+    this.load.tilemapTiledJSON("map", "tiled/mail-tile.json");
   }
   create() {
     if (!this.input.keyboard) {
@@ -30,6 +33,21 @@ export class GameScene extends Phaser.Scene {
       texture: ASSET_KEYS.PLAYER,
       frame: 0
     });
+    const map = this.make.tilemap({ key: 'map' });
+    const botanyTileSet = map.addTilesetImage('botany', 'botany')
+    const roomTileSet = map.addTilesetImage('truck', 'room')
+
+    const background = map.createLayer('background', botanyTileSet);
+    const rocks = map.createLayer('rocks', botanyTileSet);
+    const trees = map.createLayer('trees', botanyTileSet);
+    const decorations = map.createLayer('decorations', roomTileSet);
+    const collision = map.createLayer('collision-map', botanyTileSet);
+    if (!collision) {
+      return;
+    }
+
+
+    this.#player.setDepth(10);
 
     this.#roomGroup = this.physics.add.group([
       new Room({
@@ -40,6 +58,8 @@ export class GameScene extends Phaser.Scene {
     ]);
     this.setAnimations();
     this.#registerColliders();
+    collision.setCollision([28]);
+    this.physics.add.collider(this.#player, collision);
   }
   #registerColliders() {
     this.#player.setCollideWorldBounds(true);

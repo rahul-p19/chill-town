@@ -1,0 +1,343 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "/home/nerd/Downloads/chill-town-tilemap.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": -134.848484848485,
+                "y": 689.3939393939394
+            }
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#bamboo-chair": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#bamboo_chair_woven_lightwood": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#cd_shelf_gray [1x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#couch_orange_left": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#cute_kitchen_counter_horizontal [3x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#desk_cubicle_white_down": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#desk_drawer_darkwood_right": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#floor": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#grass": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#ikea_shelf_side_white [4x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#ikea_shelf_stuff_gray [2x2]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#lamp_dark_purple [1x2]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#laptop white right [1x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#lecture-stand": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#lecturn dark narrow up [1x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#microphone_lightgrey_right": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#programmer_art_brazier": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#shelf-gray": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#stand hotdog blue [2x2]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#stand icecream ltgrey [2x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#stool_black [1x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#table_1x3_white_vertical": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#table_picnic_darkwood": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#table_pool_play_red_left": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#table_pool_start_blue_right": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#trash_can_down": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#trash_can_left": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#tv_on_table [1x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#vending_machine_ltgrey_inactive [2x2]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#vending_machine_red_active": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#whiteboard": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-assets/chill-town-tilemap.tmx#whiteboard_new_blank [2x2]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx": {
+            "scale": 0.6184895833333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 639.461052631579,
+                "y": 479.3936842105264
+            }
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#bamboo_chair_woven_lightwood": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#cd_shelf_gray [1x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#couch_orange_left": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#cute_kitchen_counter_horizontal [3x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#desk_cubicle_white_down": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#desk_drawer_darkwood_right": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#floor": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#grass": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#ikea_shelf_side_white [4x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#ikea_shelf_stuff_gray [2x2]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#lamp_dark_purple [1x2]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#laptop white right [1x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#lecturn dark narrow up [1x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#microphone_lightgrey_right": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#programmer_art_brazier": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#stand hotdog blue [2x2]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#stand icecream ltgrey [2x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#stool_black [1x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#table_1x3_white_vertical": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#table_picnic_darkwood": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#table_pool_play_red_left": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#table_pool_start_blue_right": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#trash_can_down": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#trash_can_left": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#tv_on_table [1x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#vending_machine_ltgrey_inactive [2x2]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#vending_machine_red_active": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#whiteboard": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx#whiteboard_new_blank [2x2]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx": {
+            "scale": 0.6184895833333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 639.461052631579,
+                "y": 479.3936842105264
+            }
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#bamboo_chair_woven_lightwood": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#cd_shelf_gray [1x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#couch_orange_left": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#cute_kitchen_counter_horizontal [3x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#desk_cubicle_white_down": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#desk_drawer_darkwood_right": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#floor": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#grass": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#ikea_shelf_side_white [4x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#ikea_shelf_stuff_gray [2x2]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#lamp_dark_purple [1x2]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#laptop white right [1x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#lecturn dark narrow up [1x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#microphone_lightgrey_right": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#programmer_art_brazier": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#stand hotdog blue [2x2]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#stand icecream ltgrey [2x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#stool_black [1x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#table_1x3_white_vertical": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#table_picnic_darkwood": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#table_pool_play_red_left": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#table_pool_start_blue_right": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#trash_can_down": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#trash_can_left": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#tv_on_table [1x1]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#vending_machine_ltgrey_inactive [2x2]": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#vending_machine_red_active": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#whiteboard": {
+            "scaleInDock": 1
+        },
+        "/home/nerd/Downloads/chill-town-tilemap.tmx#whiteboard_new_blank [2x2]": {
+            "scaleInDock": 1
+        },
+        "mail-tile.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 676.6666666666665,
+                "y": 327.33333333333337
+            }
+        },
+        "mail-tile.tmx#botany": {
+            "scaleInDock": 1
+        },
+        "mail-tile.tmx#truck": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "/home/nerd/Documents/git/chill-town/frontend/public/tiled",
+    "last.imagePath": "/home/nerd/Downloads",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.width": 38,
+    "openFiles": [
+        "mail-tile.tmx",
+        "/home/nerd/Downloads/chill-town-tilemap.tmx"
+    ],
+    "project": "main-tile.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "/home/nerd/Documents/git/chill-town/frontend/public/assets/chill-town-tilemap.tmx",
+        "mail-tile.tmx",
+        "/home/nerd/Downloads/chill-town-tilemap.tmx"
+    ],
+    "tileset.embedInMap": true
+}
