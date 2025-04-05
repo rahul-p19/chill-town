@@ -16,7 +16,6 @@ const server = new Server({
 
 server.define("my_room", MyRoom);
 
-// Use httpServer.listen instead of server.listen
 httpServer.listen(port, () => {
   console.log(`Colyseus server is listening on port ${port}`);
 });

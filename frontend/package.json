@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "colyseus.js": "^0.16.15",
     "next": "15.2.4",
     "phaser": "^3.88.2",
     "react": "^19.0.0",
