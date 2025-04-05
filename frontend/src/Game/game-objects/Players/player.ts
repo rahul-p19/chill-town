@@ -2,29 +2,42 @@ import { PLAYER_ANIMATION_KEYS } from "@/Game/common/assets";
 import { DIRECTIONS, Position } from "@/Game/common/types";
 import { isPhysicsArcadeBody } from "@/Game/common/utils";
 import { KeyboardComponent } from "@/Game/components/input/keyboard-component";
+import { Client, Room as ColyseusRoom } from "colyseus.js";
 
 export type PlayerConfig = {
   scene: Phaser.Scene;
-  position: Position
+  position: Position;
   texture: string;
   controls: KeyboardComponent;
   frame?: string | number;
-}
+  gameRoom?: ColyseusRoom;
+};
 export class Player extends Phaser.Physics.Arcade.Sprite {
   #controls!: KeyboardComponent;
-  #direction !: DIRECTIONS;
+  #direction!: DIRECTIONS;
+  // private gameRoom?: ColyseusRoom;
 
   constructor(config: PlayerConfig) {
-    const { scene, position: { x, y }, texture, frame, controls } = config;
+    const {
+      scene,
+      position: { x, y },
+      texture,
+      frame,
+      controls,
+    } = config;
     super(scene, x, y, texture, frame || 0);
     scene.add.existing(this);
     scene.physics.add.existing(this);
     this.#controls = controls;
 
     scene.events.on("update", this.update, this);
-    scene.events.on("shutdown", () => {
-      scene.events.off("update", this.update, this);
-    }, this);
+    scene.events.on(
+      "shutdown",
+      () => {
+        scene.events.off("update", this.update, this);
+      },
+      this
+    );
     this.#direction = DIRECTIONS.DOWN;
     this.play({ key: PLAYER_ANIMATION_KEYS.IDLE_DOWN }, true);
   }
@@ -40,13 +53,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.playAnimation(PLAYER_ANIMATION_KEYS.WALK_UP);
       this.#direction = DIRECTIONS.UP;
       this.#updateVelocity(false, -100);
-    }
-    else if (controls.isDownDown) {
+    } else if (controls.isDownDown) {
       this.playAnimation(PLAYER_ANIMATION_KEYS.WALK_DOWN);
       this.#direction = DIRECTIONS.DOWN;
       this.#updateVelocity(false, 100);
-    }
-    else {
+    } else {
       this.#updateVelocity(false, 0);
     }
 
@@ -54,15 +65,19 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.playAnimation(PLAYER_ANIMATION_KEYS.WALK_RIGHT);
       this.#direction = DIRECTIONS.RIGHT;
       this.#updateVelocity(true, 100);
-    }
-    else if (controls.isLeftDown) {
+    } else if (controls.isLeftDown) {
       this.playAnimation(PLAYER_ANIMATION_KEYS.WALK_LEFT);
       this.#direction = DIRECTIONS.LEFT;
       this.#updateVelocity(true, -100);
     } else {
       this.#updateVelocity(true, 0);
     }
-    if (!controls.isUpJustDown || !controls.isDownJustDown || !controls.isLeftDown || !controls.isRightDown) {
+    if (
+      !controls.isUpJustDown ||
+      !controls.isDownJustDown ||
+      !controls.isLeftDown ||
+      !controls.isRightDown
+    ) {
       switch (this.#direction) {
         case DIRECTIONS.UP:
           this.playAnimation(PLAYER_ANIMATION_KEYS.IDLE_UP);
@@ -85,12 +100,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       return;
     }
     if (isX) {
-
       this.body.setVelocityX(vlalue);
-    }
-    else {
+    } else {
       this.body.setVelocityY(vlalue);
-
     }
   }
   #normalizeVelocity() {
