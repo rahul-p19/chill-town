@@ -1,0 +1,16 @@
+[
+  {
+    "path":"assets/player",
+    "files":[
+      {
+        "type":"spritesheet",
+        "key":"basic-male-player",
+        "url":"dark-male.png",
+        "frameConfig":{
+          "fameWidth":32,
+          "fameHeight":32
+        }
+      }
+    ]
+  }
+]
