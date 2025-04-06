@@ -74,7 +74,7 @@ export class GameRoom extends Room<GameRoomState> {
 
     // Create player state for the new client
     const player = new PlayerState();
-    player.x = options.x || 100;
+    player.x = options.x || 250;
     player.y = options.y || 100;
     player.animation = options.animation || "idle-down";
 

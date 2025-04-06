@@ -160,15 +160,19 @@ export class GameScene extends Phaser.Scene {
 
   initializeGameObjects() {
     this.#controls = new KeyboardComponent(this.input.keyboard!);
+    this.physics.world.setBounds(0,0,2000,2000);
+    this.cameras.main.setBounds(0,0,2000,2000);
 
     // Create player
     this.#player = new Player({
       controls: this.#controls,
       scene: this,
-      position: { x: 100, y: 100 },
+      position: { x: 250, y: 100 },
       texture: ASSET_KEYS.PLAYER,
       frame: 0,
     });
+
+    this.cameras.main.startFollow(this.#player, true, 0.05, 0.05)
 
     // Create tilemap
     const map = this.make.tilemap({ key: 'map' });
