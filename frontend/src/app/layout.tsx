@@ -1,19 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Pixelify_Sans } from "next/font/google";
+import { Pixelify_Sans } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Appbar } from "../../components/Appbar";
 import { ClientProviders } from "../components/ClientProvider";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const pixelifySans = Pixelify_Sans({
   variable: "--font-pixelify",
@@ -33,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased ${pixelifySans.variable}`}
+        className={`antialiased ${pixelifySans.variable}`}
       >
         <ClerkProvider>
           <ClientProviders>
