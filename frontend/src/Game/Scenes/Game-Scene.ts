@@ -3,7 +3,9 @@ import { Player } from "../game-objects/Players/player";
 import { ASSET_KEYS, PLAYER_ANIMATION_KEYS } from "../common/assets";
 import { KeyboardComponent } from "../components/input/keyboard-component";
 import { Room } from "../game-objects/Rooms/room";
+
 import { Client, Room as ColyseusRoom } from "colyseus.js";
+
 
 export class GameScene extends Phaser.Scene {
   #player!: Player;
@@ -23,6 +25,10 @@ export class GameScene extends Phaser.Scene {
   }
 
   preload() {
+    console.log("game loaded")
+    this.load.image("botany", "assets/world/botanic.png");
+    this.load.image("room", "assets/world/truck.png");
+    this.load.tilemapTiledJSON("map", "tiled/mail-tile.json");
     console.log("game loaded");
   }
 
@@ -128,6 +134,21 @@ export class GameScene extends Phaser.Scene {
       frame: 0,
       gameRoom: this.#gameRoom || undefined,
     });
+    const map = this.make.tilemap({ key: 'map' });
+    const botanyTileSet = map.addTilesetImage('botany', 'botany')
+    const roomTileSet = map.addTilesetImage('truck', 'room')
+
+    const background = map.createLayer('background', botanyTileSet);
+    const rocks = map.createLayer('rocks', botanyTileSet);
+    const trees = map.createLayer('trees', botanyTileSet);
+    const decorations = map.createLayer('decorations', roomTileSet);
+    const collision = map.createLayer('collision-map', botanyTileSet);
+    if (!collision) {
+      return;
+    }
+
+
+    this.#player.setDepth(10);
 
     this.#roomGroup = this.physics.add.group([
       new Room({
@@ -139,6 +160,8 @@ export class GameScene extends Phaser.Scene {
 
     this.setAnimations();
     this.#registerColliders();
+    collision.setCollision([28]);
+    this.physics.add.collider(this.#player, collision);
   }
 
   #registerColliders() {
@@ -147,6 +170,10 @@ export class GameScene extends Phaser.Scene {
       const modifiedRoom = room as Phaser.Physics.Arcade.Image;
       modifiedRoom.setImmovable(true);
       modifiedRoom.setCollideWorldBounds(true);
+
+    })
+    this.physics.add.collider(this.#player, this.#roomGroup, (player: any, room: any) => {
+      window.location.href = "https://www.google.com"
     });
 
     this.physics.add.collider(
@@ -287,3 +314,4 @@ export class GameScene extends Phaser.Scene {
     }
   }
 }
+
