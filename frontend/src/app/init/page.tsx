@@ -16,7 +16,7 @@ const JoinRoom = () => {
     if (!roomID) return alert("Please enter a room ID!");
     // You can store the avatar in localStorage or state mgmt if needed later
     localStorage.setItem("selectedAvatar", selectedAvatar);
-    router.push(`/game`);
+    window.location.href = 'game';
   };
 
   return (
