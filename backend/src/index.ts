@@ -5,107 +5,107 @@ import { WebSocketTransport } from "@colyseus/ws-transport";
 import express from "express";
 import cors from "cors";
 
-import { MyRoom } from "./rooms/MyRoom";
+import { GameRoom } from "./rooms/MyRoom";
 
 const app = express();
 export const httpServer = createServer(app);
 const port = Number(process.env.PORT || 2567);
 
 const corsOptions = {
-	origin: [
-		"http://localhost:3000",
-		"http://localhost:4173",
-		"https://6znr3gxn-4173.inc1.devtunnels.ms",
-		"https://6znr3gxn-3000.inc1.devtunnels.ms",
-	],
-	optionsSuccessStatus: 200,
-	methods: ["GET", "POST"],
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:4173",
+    "https://6znr3gxn-4173.inc1.devtunnels.ms",
+    "https://6znr3gxn-3000.inc1.devtunnels.ms",
+  ],
+  optionsSuccessStatus: 200,
+  methods: ["GET", "POST"],
 };
 
 app.use(cors(corsOptions));
 
 const server = new Server({
-	transport: new WebSocketTransport({
-		server: httpServer,
-	}),
+  transport: new WebSocketTransport({
+    server: httpServer,
+  }),
 });
 
-server.define("my_room", MyRoom);
+server.define("my_room", GameRoom);
 
 const io = new socketServer(httpServer, {
-	cors: {
-		origin: [
-			"http://localhost:3000",
-			"http://localhost:4173",
-			"https://6znr3gxn-4173.inc1.devtunnels.ms",
-			"https://6znr3gxn-3000.inc1.devtunnels.ms",
-		],
-		optionsSuccessStatus: 200,
-		methods: ["GET", "POST"],
-	},
+  cors: {
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:4173",
+      "https://6znr3gxn-4173.inc1.devtunnels.ms",
+      "https://6znr3gxn-3000.inc1.devtunnels.ms",
+    ],
+    optionsSuccessStatus: 200,
+    methods: ["GET", "POST"],
+  },
 });
 
 const rooms: { [roomID: string]: string[] } = {};
 const socketToRoom: { [socketID: string]: string } = {};
 
 io.on("connection", (socket) => {
-	console.log(`${socket.id} connected`);
+  console.log(`${socket.id} connected`);
 
-	socket.on("joinRoom", (roomID) => {
-		console.log(`${socket.id} joining ${roomID}`);
+  socket.on("joinRoom", (roomID) => {
+    console.log(`${socket.id} joining ${roomID}`);
 
-		if (rooms[roomID]) {
-			const length = rooms[roomID].length;
-			if (length === 4) {
-				socket.emit("room full");
-				return;
-			}
-			rooms[roomID].push(socket.id);
-		} else {
-			rooms[roomID] = [socket.id];
-		}
-		socketToRoom[socket.id] = roomID;
-		console.log(`Users in room ${roomID}`, rooms[roomID]);
-		const usersInThisRoom = rooms[roomID].filter((id) => id !== socket.id);
+    if (rooms[roomID]) {
+      const length = rooms[roomID].length;
+      if (length === 4) {
+        socket.emit("room full");
+        return;
+      }
+      rooms[roomID].push(socket.id);
+    } else {
+      rooms[roomID] = [socket.id];
+    }
+    socketToRoom[socket.id] = roomID;
+    console.log(`Users in room ${roomID}`, rooms[roomID]);
+    const usersInThisRoom = rooms[roomID].filter((id) => id !== socket.id);
 
-		socket.emit("allUsers", usersInThisRoom);
-	});
+    socket.emit("allUsers", usersInThisRoom);
+  });
 
-	socket.on(
-		"sendSignal",
-		(payload: { signal: any; userToSignal: string; callerID: string }) => {
-			console.log(
-				`Server: ${payload.callerID} inviting ${payload.userToSignal}`
-			);
+  socket.on(
+    "sendSignal",
+    (payload: { signal: any; userToSignal: string; callerID: string }) => {
+      console.log(
+        `Server: ${payload.callerID} inviting ${payload.userToSignal}`
+      );
 
-			io.to(payload.userToSignal).emit("userJoined", {
-				signal: payload.signal,
-				callerID: payload.callerID,
-			});
-		}
-	);
+      io.to(payload.userToSignal).emit("userJoined", {
+        signal: payload.signal,
+        callerID: payload.callerID,
+      });
+    }
+  );
 
-	socket.on("returnSignal", (payload) => {
-		console.log(`Server: ${socket.id} sending back return signal.`);
+  socket.on("returnSignal", (payload) => {
+    console.log(`Server: ${socket.id} sending back return signal.`);
 
-		io.to(payload.callerID).emit("receiveReturnSignal", {
-			signal: payload.signal,
-			id: socket.id,
-		});
-	});
+    io.to(payload.callerID).emit("receiveReturnSignal", {
+      signal: payload.signal,
+      id: socket.id,
+    });
+  });
 
-	socket.on("disconnect", () => {
-		const roomID = socketToRoom[socket.id];
-		let room = rooms[roomID];
-		if (room) {
-			room = room.filter((id) => id !== socket.id);
-			rooms[roomID] = room;
-		}
+  socket.on("disconnect", () => {
+    const roomID = socketToRoom[socket.id];
+    let room = rooms[roomID];
+    if (room) {
+      room = room.filter((id) => id !== socket.id);
+      rooms[roomID] = room;
+    }
 
-		socket.broadcast.emit("userDisconnected", socket.id);
-	});
+    socket.broadcast.emit("userDisconnected", socket.id);
+  });
 });
 
 httpServer.listen(port, () => {
-	console.log(`Colyseus server is listening on port ${port}`);
+  console.log(`Colyseus server is listening on port ${port}`);
 });
