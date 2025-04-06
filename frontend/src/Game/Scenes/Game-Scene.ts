@@ -1,17 +1,20 @@
 import { SCENE_KEYS } from "./SceneKeys";
 import { Player } from "../game-objects/Players/player";
 import { OtherPlayer } from "../game-objects/Players/other-player";
-import { ASSET_KEYS, PLAYER_ANIMATION_KEYS } from "../common/assets";
+import { ASSET_KEYS, PLAYER_ANIMATION_KEYS, ROOM_ANIMATION_KEYS } from "../common/assets";
 import { KeyboardComponent } from "../components/input/keyboard-component";
 import { Room } from "../game-objects/Rooms/room";
 import { ChatComponent } from "../components/ui/chat-component";
 
 import { Client, Room as ColyseusRoom } from "colyseus.js";
+import { MarketPlace } from "../game-objects/Marketplace/marketplace";
 
 export class GameScene extends Phaser.Scene {
   #player!: Player;
+  #marketplace!: MarketPlace;
   #controls!: KeyboardComponent;
   #roomGroup!: Phaser.GameObjects.Group;
+  #marketplaceGroup!: Phaser.GameObjects.Group;
   #client!: Client;
   gameRoom: ColyseusRoom | null = null;
   #otherPlayers: Map<string, OtherPlayer> = new Map();
@@ -36,7 +39,7 @@ export class GameScene extends Phaser.Scene {
     bubble.fillStyle(0xffffff, 0.7);
     bubble.fillRoundedRect(player.x - 60, player.y - 60, 120, 40, 10);
     bubble.setDepth(20);
-    
+
     // Add text
     const chatText = this.add.text(player.x, player.y - 40, text.substring(0, 15) + (text.length > 15 ? "..." : ""), {
       fontSize: '12px',
@@ -46,7 +49,7 @@ export class GameScene extends Phaser.Scene {
     });
     chatText.setOrigin(0.5, 0.5);
     chatText.setDepth(21);
-    
+
     // Remove after 3 seconds
     this.time.delayedCall(3000, () => {
       bubble.destroy();
@@ -87,7 +90,7 @@ export class GameScene extends Phaser.Scene {
     // Create chat UI that initially is hidden
     this.#chatComponent = new ChatComponent(this);
     // this.#chatComponent.setVisible(false);
-    
+
     // Add keyboard shortcut to toggle chat (e.g., 'C' key)
     this.input.keyboard?.on('keydown-C', () => {
       // Only show chat if there are nearby players
@@ -100,7 +103,7 @@ export class GameScene extends Phaser.Scene {
           color: '#ffffff',
           backgroundColor: '#000000'
         }).setOrigin(0.5, 0.5).setDepth(100).setAlpha(0.8)
-        .setScrollFactor(0);
+          .setScrollFactor(0);
       }
     });
   }
@@ -117,11 +120,11 @@ export class GameScene extends Phaser.Scene {
             this.#player.x, this.#player.y,
             sender.x, sender.y
           );
-          
+
           // Only show message if players are in chat range
           if (distance <= this.#chatRange) {
             this.#chatComponent.addMessage(message.senderName || "Player", message.text);
-            
+
             // Also show speech bubble above the player
             this.showSpeechBubble(sender, message.text);
           }
@@ -236,8 +239,9 @@ export class GameScene extends Phaser.Scene {
 
   initializeGameObjects() {
     this.#controls = new KeyboardComponent(this.input.keyboard!);
-    this.physics.world.setBounds(0,0,2000,2000);
-    this.cameras.main.setBounds(0,0,2000,2000);
+
+    this.physics.world.setBounds(0, 0, 2000, 2000);
+    this.cameras.main.setBounds(0, 0, 2000, 2000);
 
     // Create player
     this.#player = new Player({
@@ -262,7 +266,7 @@ export class GameScene extends Phaser.Scene {
     const decorations = map.createLayer('decorations', roomTileSet!);
     const collision = map.createLayer('collision-map', botanyTileSet!);
 
-    if (!collision) {
+    if (!collision || !decorations) {
       console.error("Collision layer not found");
       return;
     }
@@ -277,6 +281,13 @@ export class GameScene extends Phaser.Scene {
         texture: ASSET_KEYS.ROOM,
       }),
     ]);
+    this.#marketplaceGroup = this.physics.add.group([
+      new MarketPlace({
+        scene: this,
+        position: { x: 400, y: 10 },
+        texture: ASSET_KEYS.MARKETPLACE,
+      }),
+    ]);
 
     this.cameras.main.startFollow(this.#player, true, 0.05, 0.05);
     this.setAnimations();
@@ -285,11 +296,11 @@ export class GameScene extends Phaser.Scene {
     // Set up collision with the map
     collision.setCollision([28]);
     this.physics.add.collider(this.#player, collision);
-
-    // Set up collision for other players with the map
-    this.#otherPlayers.forEach(player => {
-      this.physics.add.collider(player, collision);
+    this.physics.add.collider(this.#player, decorations, () => {
+      alert("got here");
+      //window.location.href = "marketplace"
     });
+
   }
 
   #registerColliders() {
@@ -302,9 +313,17 @@ export class GameScene extends Phaser.Scene {
       modifiedRoom.setCollideWorldBounds(true);
     });
 
+    this.#marketplaceGroup.getChildren().forEach((marketplace) => {
+      const modiMarketplace = marketplace as Phaser.Physics.Arcade.Image;
+      modiMarketplace.setImmovable(true);
+      modiMarketplace.setCollideWorldBounds(true);
+    });
     // Room collision that redirects to a new page
     this.physics.add.collider(this.#player, this.#roomGroup, (player: any, room: any) => {
       window.location.href = "room/test";
+    });
+    this.physics.add.collider(this.#player, this.#marketplaceGroup, (player: any, marketplace: any) => {
+      window.location.href = "marketplace";
     });
 
     // Notify server about room collision
@@ -409,20 +428,29 @@ export class GameScene extends Phaser.Scene {
       frameRate: 8,
       repeat: rep,
     });
+    this.anims.create({
+      key: ROOM_ANIMATION_KEYS.ANIMATE,
+      frames: this.anims.generateFrameNumbers(ASSET_KEYS.ROOM, {
+        start: 0,
+        end: 6,
+      }),
+      frameRate: 8,
+      repeat: rep,
+    });
   }
 
   updateChatPartners() {
     this.#activeChatPartners.clear();
-    
+
     this.#otherPlayers.forEach((otherPlayer, sessionId) => {
       const distance = Phaser.Math.Distance.Between(
         this.#player.x, this.#player.y,
         otherPlayer.x, otherPlayer.y
       );
-      
+
       if (distance <= this.#chatRange) {
         this.#activeChatPartners.set(sessionId, otherPlayer);
-        
+
         // Visual indicator for players in chat range
         if (!otherPlayer.chatIndicator) {
           otherPlayer.setChatIndicator(true);
@@ -431,7 +459,7 @@ export class GameScene extends Phaser.Scene {
         otherPlayer.setChatIndicator(false);
       }
     });
-    
+
     // Update chat UI with current chat partners
     if (this.#chatComponent && this.#chatComponent.visible) {
       this.#chatComponent.updatePartnersList(Array.from(this.#activeChatPartners.values()));

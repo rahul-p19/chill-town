@@ -1,6 +1,7 @@
 export const ASSET_KEYS = {
   PLAYER: "BASIC_MALE_DARK",
-  ROOM: "ROOM"
+  ROOM: "ROOM2",
+  MARKETPLACE: "MARKETPLACE"
 }
 export const PLAYER_ANIMATION_KEYS = {
   IDLE_DOWN: "idle_down",
@@ -11,4 +12,7 @@ export const PLAYER_ANIMATION_KEYS = {
   WALK_UP: "walk_up",
   WALK_RIGHT: "walk_right",
   WALK_LEFT: "walk_left",
+}
+export const ROOM_ANIMATION_KEYS = {
+  ANIMATE: "animate",
 }

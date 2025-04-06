@@ -20,6 +20,26 @@
         "type":"image",
         "key":"ROOM",
         "url":"room.png"
+      },
+      {
+        "type":"spritesheet",
+        "key":"ROOM2",
+        "url":"room2.png",
+        "frameConfig":{
+          "frameWidth":112,
+          "frameHeight":128
+        }
+      }
+    ]
+  },
+
+  {
+    "path":"assets/marketplace",
+    "files":[
+      {
+        "type":"image",
+        "key":"MARKETPLACE",
+        "url":"marketplace.png"
       }
     ]
   }

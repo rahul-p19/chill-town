@@ -7,11 +7,11 @@ export type PlayerConfig = {
   position: Position
   texture: string;
 }
-export class Room extends Phaser.Physics.Arcade.Sprite {
+export class MarketPlace extends Phaser.Physics.Arcade.Image {
 
   constructor(config: PlayerConfig) {
     const { scene, position: { x, y }, texture } = config;
-    super(scene, x, y, texture, 0);
+    super(scene, x, y, texture);
 
     scene.add.existing(this);
     scene.physics.add.existing(this);
@@ -24,7 +24,5 @@ export class Room extends Phaser.Physics.Arcade.Sprite {
   }
 
   update() {
-    this.play({ key: ROOM_ANIMATION_KEYS.ANIMATE, repeat: -1 }, true);
-
   }
 }
