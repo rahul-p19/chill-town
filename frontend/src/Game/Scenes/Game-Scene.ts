@@ -43,7 +43,7 @@ export class GameScene extends Phaser.Scene {
     try {
       this.#gameRoom = await this.#client.joinOrCreate("my_room");
       console.log("Connected to room:", this.#gameRoom.sessionId);
-      this.setupRoomHandlers();
+      //this.setupRoomHandlers();
       this.initializeGameObjects();
     } catch (error) {
       console.error("Failed to connect to Colyseus server:", error);
@@ -138,11 +138,11 @@ export class GameScene extends Phaser.Scene {
     const botanyTileSet = map.addTilesetImage('botany', 'botany')
     const roomTileSet = map.addTilesetImage('truck', 'room')
 
-    const background = map.createLayer('background', botanyTileSet);
-    const rocks = map.createLayer('rocks', botanyTileSet);
-    const trees = map.createLayer('trees', botanyTileSet);
-    const decorations = map.createLayer('decorations', roomTileSet);
-    const collision = map.createLayer('collision-map', botanyTileSet);
+    const background = map.createLayer('background', botanyTileSet!);
+    const rocks = map.createLayer('rocks', botanyTileSet!);
+    const trees = map.createLayer('trees', botanyTileSet!);
+    const decorations = map.createLayer('decorations', roomTileSet!);
+    const collision = map.createLayer('collision-map', botanyTileSet!);
     if (!collision) {
       return;
     }
@@ -173,7 +173,7 @@ export class GameScene extends Phaser.Scene {
 
     })
     this.physics.add.collider(this.#player, this.#roomGroup, (player: any, room: any) => {
-      window.location.href = "https://www.google.com"
+      window.location.href = "room/test"
     });
 
     this.physics.add.collider(
