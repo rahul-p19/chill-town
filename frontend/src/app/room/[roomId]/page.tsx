@@ -31,11 +31,11 @@ const Video = (props: { peer: Peer.Instance }) => {
 // 	width: (2 * window.innerWidth) / 5,
 // };
 
-const Room = ({ params }) => {
+const Room = ({ params } : {params: {roomId: string}}) => {
   const [peers, setPeers] = useState<Peer.Instance[]>([]);
   const [sharingScreen, setSharingScreen] = useState<boolean>(false);
   const [toggleMicText, setToggleMicText] = useState<string>("Turn off mic");
-  // const [roomID, setRoomID] = useState<string>("");
+  // const [roomId, setroomId] = useState<string>("");
   const [toggleCameraText, setToggleCameraText] =
     useState<string>("Turn off camera");
   const socketRef = useRef<SocketIOClient.Socket>(null);
@@ -43,7 +43,7 @@ const Room = ({ params }) => {
   const peersRef = useRef<{ peerID: string; peer: Peer.Instance }[]>([]);
   const currentStreamRef = useRef<MediaStream>(null);
   // const params = useRouter();
-  const roomID = params.roomID;
+  const roomId = params.roomId;
 
   useEffect(() => {
     videoConstraints = {
@@ -66,7 +66,7 @@ const Room = ({ params }) => {
         userVideo.current.srcObject = currentStreamRef.current;
 
       if (socketRef.current) {
-        socketRef.current.emit("joinRoom", roomID);
+        socketRef.current.emit("joinRoom", roomId);
 
         socketRef.current.on("allUsers", (users: string[]) => {
           const peers: Peer.Instance[] = [];

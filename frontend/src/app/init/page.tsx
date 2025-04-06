@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 const avatars = [
   "https://ipfs.io/ipfs/bafkreihlaw7zoxykg2pbbe332a6pp74fjh7j7hb25ehz6nfeukenntqwgy",
@@ -8,7 +7,6 @@ const avatars = [
 ];
 
 const JoinRoom = () => {
-  const router = useRouter();
   const [roomID, setRoomID] = useState("");
   const [selectedAvatar, setSelectedAvatar] = useState(avatars[0]);
 
@@ -20,20 +18,22 @@ const JoinRoom = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black text-white px-4 py-10 font-pixelify">
+    <div className="min-h-[90vh] flex flex-col items-center justify-center bg-black text-white px-4 py-10 font-pixelify">
       <h1 className="text-6xl font-extrabold mb-10 drop-shadow-lg">
-        🎮 
         <span className=" bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-red-500">
           Join the Arena
           </span>
       </h1>
 
-      <div className="bg-zinc-800/50 p-8 rounded-2xl shadow-lg w-full max-w-xl text-center font-sans">
+      <div className="bg-gradient-to-br from-zinc-800/50 to-yellow-950/50 p-8 rounded-2xl shadow-lg w-full max-w-xl text-center font-sans">
         <label className="font-bold mb-3 block text-xl">Choose Your Avatar</label>
-        <div className="flex justify-around gap-4 my-6 h-full w-full">
+        <div className="flex justify-around gap-4 my-10 h-full w-full">
           {avatars.map((avatar) => (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               key={avatar}
+              height={80}
+              width={80}
               src={avatar}
               alt="avatar"
               onClick={() => setSelectedAvatar(avatar)}
@@ -51,7 +51,7 @@ const JoinRoom = () => {
           placeholder="Enter Room Code..."
           value={roomID}
           onChange={(e) => setRoomID(e.target.value)}
-          className="w-fit px-4 py-3 rounded-full mb-6 text-gray-300 focus:outline-none focus:ring-2 border border-white/20 focus:border-transparent focus:ring-amber-500"
+          className="w-fit px-4 py-3 rounded-full mb-6 text-gray-300 focus:outline-none focus:ring-2 border border-white/20 focus:border-transparent focus:ring-amber-500 font-pixelify text-lg"
           />
 
         <button

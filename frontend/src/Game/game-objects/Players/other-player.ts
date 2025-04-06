@@ -12,7 +12,8 @@ export type OtherPlayerConfig = {
 
 export class OtherPlayer extends Phaser.Physics.Arcade.Sprite {
   #direction: DIRECTIONS;
-  readonly sessionId: string;
+  public sessionId: string;
+  public chatIndicator: Phaser.GameObjects.Image | null = null;
 
   constructor(config: OtherPlayerConfig) {
     const {
@@ -36,6 +37,43 @@ export class OtherPlayer extends Phaser.Physics.Arcade.Sprite {
       this.body.setImmovable(false);
       this.body.pushable = false; // Don't let local player push this player
     }
+  }
+
+  setChatIndicator(visible: boolean) {
+    if (visible && !this.chatIndicator) {
+      // Add chat bubble indicator above player
+      // this.chatIndicator = this.scene.add.image(this.x, this.y - 60, 'chat-icon');
+      // this.chatIndicator.setScale(0.2);
+      // this.chatIndicator.setAlpha(0.6);
+      // this.chatIndicator.setDepth(20);
+    } else if (!visible && this.chatIndicator) {
+      this.chatIndicator.destroy();
+      this.chatIndicator = null;
+    }
+    
+    // Update position if indicator exists
+    if (this.chatIndicator) {
+      this.chatIndicator.x = this.x;
+      this.chatIndicator.y = this.y - 30;
+    }
+  }
+  
+  // Make sure to update the chat indicator position in preUpdate
+  preUpdate(time: number, delta: number) {
+    super.preUpdate(time, delta);
+    
+    if (this.chatIndicator) {
+      this.chatIndicator.x = this.x;
+      this.chatIndicator.y = this.y - 30;
+    }
+  }
+  
+  // Add this to your destroy method or create it if it doesn't exist
+  destroy(fromScene?: boolean) {
+    if (this.chatIndicator) {
+      this.chatIndicator.destroy();
+    }
+    super.destroy(fromScene);
   }
 
   playAnimation(animationKey: string) {

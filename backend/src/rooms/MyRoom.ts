@@ -56,6 +56,15 @@ export class GameRoom extends Room<GameRoomState> {
       }, { except: client });
     });
 
+    this.onMessage("chatMessage", (client, data) => {
+      // Broadcast chat message to all clients
+      this.broadcast("chatMessage", {
+        senderId: client.sessionId,
+        senderName: data.senderName || "Player",
+        text: data.text
+      });
+    });
+
     // Handle room collision events
     this.onMessage("roomCollision", (client, message) => {
       console.log(`Player ${client.sessionId} collided with room ${message.roomId}`);
