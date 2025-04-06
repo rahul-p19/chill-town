@@ -5,7 +5,7 @@ import "../src/ChillToken.sol";
 
 contract MintChillToken is Script {
     function run() external {
-        address contractAddress = 0x0Af39c275ed7698F6e5b4C676F3396db88Db5ED9;
+        address contractAddress = 0xDe10B8ba9D8D15EDcD6553cA2DbA489f3dd95944;
         address to = 0x424bBA2a6f1c14e4D8e2Cf1bCAE1B06740Fa4755;
         string memory description = "This token is the first avatar";
         string memory imageUri = "ipfs://bafkreidk42gcnifgom4uqc74huhqvxz72yjfdshjqjkwukow3oiwnuku7e";

@@ -17,4 +17,4 @@ contract ChillTokenScript is Script {
     }
 }
 
-//Contract Address: 0x0Af39c275ed7698F6e5b4C676F3396db88Db5ED9
+//Contract Address: 0xDe10B8ba9D8D15EDcD6553cA2DbA489f3dd95944
