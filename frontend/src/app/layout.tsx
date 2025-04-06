@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Pixelify_Sans } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Appbar } from "../../components/Appbar";
+import { ClientProviders } from "../components/ClientProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,8 +17,8 @@ const geistMono = Geist_Mono({
 
 const pixelifySans = Pixelify_Sans({
   variable: "--font-pixelify",
-  subsets: ["latin"]
-})
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "ChillTown",
@@ -31,14 +32,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ClerkProvider>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased ${pixelifySans.variable}`}
       >
-        <Appbar />
-        {children}
+        <ClerkProvider>
+          <ClientProviders>
+            <Appbar />
+            {children}
+          </ClientProviders>
+        </ClerkProvider>
       </body>
-      </ClerkProvider>
     </html>
   );
 }

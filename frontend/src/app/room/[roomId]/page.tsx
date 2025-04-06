@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import io from "socket.io-client";
 import Peer, { SignalData } from "simple-peer";
-import { Camera, CameraOff, Mic, MicOff } from "lucide-react";
+import { Camera, CameraOff, Mic, MicOff, Maximize } from "lucide-react";
 
 const streamMap = new Map();
 let videoConstraints: { height: number; width: number };
@@ -14,7 +14,7 @@ const iceServers = [
 
 const Video = (props: { peer: Peer.Instance }) => {
   const ref = useRef<HTMLVideoElement>(null);
-
+  
   useEffect(() => {
     if (ref.current) ref.current.srcObject = streamMap.get(props.peer);
 
@@ -22,8 +22,33 @@ const Video = (props: { peer: Peer.Instance }) => {
       if (ref.current) ref.current.srcObject = stream;
     });
   }, []);
+  
+  const toggleFullScreen = () => {
+    if (ref.current) {
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(err => {
+          console.error('Error exiting fullscreen:', err);
+        });
+      } else {
+        ref.current.requestFullscreen().catch(err => {
+          console.error('Error entering fullscreen:', err);
+        });
+      }
+    }
+  };
 
-  return <video playsInline autoPlay ref={ref} className="border rounded-lg" />;
+  return (
+    <div className="relative">
+      <video playsInline autoPlay ref={ref} className="border rounded-lg w-full" />
+      <button 
+        onClick={toggleFullScreen}
+        className="absolute top-2 left-2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 rounded-full shadow-md transition-all duration-200"
+        title="Fullscreen"
+      >
+        <Maximize size={16} />
+      </button>
+    </div>
+  );
 };
 
 // const videoConstraints = {
@@ -326,7 +351,7 @@ const Room = ({ params } : {params: {roomId: string}}) => {
           </button>
           <button
             onClick={toggleCamera}
-            className={`${toggleCameraText === "Turn off mic" ? "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500" : "bg-red-500"} flex justify-center text-white font-semibold px-6 py-2 rounded-full shadow-md hover:scale-105 transition-transform duration-200`}
+            className={`${toggleCameraText === "Turn on camera" ? "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500" : "bg-red-500"} flex justify-center text-white font-semibold px-6 py-2 rounded-full shadow-md hover:scale-105 transition-transform duration-200`}
           >
 			{toggleCameraText === "Turn on camera" ? <Camera /> : <CameraOff />}
             {/* {toggleCameraText} */}
@@ -348,13 +373,34 @@ const Room = ({ params } : {params: {roomId: string}}) => {
           )}
         </div>
 
-        <video
-          muted
-          ref={userVideo}
-          autoPlay
-          playsInline
-          className="rounded-xl mt-4 h-[30vh] border-4 border-amber-500 shadow-xl"
-        />
+        <div className="relative">
+          <video
+            muted
+            ref={userVideo}
+            autoPlay
+            playsInline
+            className="rounded-xl mt-4 h-[30vh] border-4 border-amber-500 shadow-xl"
+          />
+          <button 
+            onClick={() => {
+              if (userVideo.current) {
+                if (document.fullscreenElement) {
+                  document.exitFullscreen().catch(err => {
+                    console.error('Error exiting fullscreen:', err);
+                  });
+                } else {
+                  userVideo.current.requestFullscreen().catch(err => {
+                    console.error('Error entering fullscreen:', err);
+                  });
+                }
+              }
+            }}
+            className="absolute top-2 left-2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 rounded-full shadow-md transition-all duration-200"
+            title="Fullscreen"
+          >
+            <Maximize size={16} />
+          </button>
+        </div>
       </div>
     </div>
   );
