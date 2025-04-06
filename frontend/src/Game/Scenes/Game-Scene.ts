@@ -202,6 +202,7 @@ export class GameScene extends Phaser.Scene {
       }),
     ]);
 
+    this.cameras.main.startFollow(this.#player, true, 0.05, 0.05);
     this.setAnimations();
     this.#registerColliders();
 
