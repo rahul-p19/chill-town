@@ -1,9 +1,11 @@
 "use client";
+
 import { Tag, User } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { formatEther } from "viem";
+import { useAccount } from "wagmi";
 
 interface Token {
   id: string;
@@ -20,14 +22,20 @@ interface TokenCardProps {
 
 export default function TokenCard({ token, viewMode }: TokenCardProps) {
   const formattedPrice = formatEther(token.price);
+  const { address } = useAccount();
+  const isOwner = address?.toLowerCase() === token.owner.toLowerCase();
+
+  const tokenImage = token.imageUri || "/placeholder.svg?height=300&width=300";
+  const tokenAlt = token.description || `Token #${token.id}`;
+  const ownerShort = `${token.owner.slice(0, 6)}...${token.owner.slice(-4)}`;
 
   if (viewMode === "grid") {
     return (
       <Card className="overflow-hidden border border-zinc-800 bg-zinc-900/80 backdrop-blur-sm hover:shadow-lg transition-all duration-300 hover:border-zinc-700">
         <div className="relative aspect-square">
           <Image
-            src={token.imageUri || "/placeholder.svg?height=300&width=300"}
-            alt={token.description || `Token #${token.id}`}
+            src={tokenImage}
+            alt={tokenAlt}
             fill
             className="object-cover"
           />
@@ -44,14 +52,21 @@ export default function TokenCard({ token, viewMode }: TokenCardProps) {
           <div className="flex items-center text-xs text-zinc-400 gap-2 mt-2">
             <User className="h-3 w-3" />
             <span className="truncate">
-              Owner: {token.owner.slice(0, 6)}...{token.owner.slice(-4)}
+              Owner: {ownerShort}
+              {isOwner && " (You)"}
             </span>
           </div>
         </CardContent>
         <CardFooter className="p-4 pt-0">
-          <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">
-            View Details
-          </Button>
+          {isOwner ? (
+            <div className="w-full text-center text-sm text-zinc-400 py-2">
+              You own this token
+            </div>
+          ) : (
+            <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">
+              Buy Now
+            </Button>
+          )}
         </CardFooter>
       </Card>
     );
@@ -62,8 +77,8 @@ export default function TokenCard({ token, viewMode }: TokenCardProps) {
       <div className="flex flex-col md:flex-row">
         <div className="relative w-full md:w-48 h-48">
           <Image
-            src={token.imageUri || "/placeholder.svg?height=300&width=300"}
-            alt={token.description || `Token #${token.id}`}
+            src={tokenImage}
+            alt={tokenAlt}
             fill
             className="object-cover"
           />
@@ -81,7 +96,8 @@ export default function TokenCard({ token, viewMode }: TokenCardProps) {
             <div className="flex items-center text-xs text-zinc-400 gap-2">
               <User className="h-3 w-3" />
               <span>
-                Owner: {token.owner.slice(0, 6)}...{token.owner.slice(-4)}
+                Owner: {ownerShort}
+                {isOwner && " (You)"}
               </span>
             </div>
             <div className="flex items-center text-xs text-zinc-400 gap-2">
@@ -89,9 +105,13 @@ export default function TokenCard({ token, viewMode }: TokenCardProps) {
               <span>Token ID: {token.id}</span>
             </div>
           </div>
-          <Button className="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white">
-            View Details
-          </Button>
+          {isOwner ? (
+            <div className="text-sm text-zinc-400 py-2">You own this token</div>
+          ) : (
+            <Button className="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white">
+              Buy Now
+            </Button>
+          )}
         </div>
       </div>
     </Card>

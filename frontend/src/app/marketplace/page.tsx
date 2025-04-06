@@ -34,7 +34,7 @@ interface Token {
   owner: string;
 }
 
-const CONTRACT_ADDRESS = "0x0Af39c275ed7698F6e5b4C676F3396db88Db5ED9";
+const CONTRACT_ADDRESS = "0xDe10B8ba9D8D15EDcD6553cA2DbA489f3dd95944";
 
 export default function MarketplacePage() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -50,16 +50,19 @@ export default function MarketplacePage() {
       connector.name.toLowerCase() === "metamask" || connector.id === "injected"
   );
 
-  const { data: tokenIds, isSuccess: tokenIdsSuccess } = useReadContract({
-    address: CONTRACT_ADDRESS,
-    abi: contractABI,
-    functionName: "getTokensByOwner",
-    args: [address],
-    query: {
-      enabled: isConnected && !!address,
-    },
-  });
+  //   const { data: tokenIds, isSuccess: tokenIdsSuccess } = useReadContract({
+  //     address: CONTRACT_ADDRESS,
+  //     abi: contractABI,
+  //     functionName: "getTokensByOwner",
+  //     args: [address],
+  //     query: {
+  //       enabled: isConnected && !!address,
+  //     },
+  //   });
+
   useEffect(() => {
+    const tokenIds = [BigInt(1), BigInt(3), BigInt(4)];
+    const tokenIdsSuccess = true;
     if (
       !tokenIdsSuccess ||
       !tokenIds ||
@@ -115,7 +118,7 @@ export default function MarketplacePage() {
     };
 
     fetchTokens();
-  }, [tokenIds, tokenIdsSuccess, address]);
+  }, [address]);
 
   const filteredTokens = tokens.filter((token) =>
     token.description.toLowerCase().includes(searchTerm.toLowerCase())
