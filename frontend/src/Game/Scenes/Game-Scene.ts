@@ -4,6 +4,7 @@ import { ASSET_KEYS, PLAYER_ANIMATION_KEYS } from "../common/assets";
 import { KeyboardComponent } from "../components/input/keyboard-component";
 import { Room } from "../game-objects/Rooms/room";
 import { register } from "module";
+import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 
 export class GameScene extends Phaser.Scene {
   #player!: Player;
@@ -69,7 +70,7 @@ export class GameScene extends Phaser.Scene {
       modifiedRoom.setCollideWorldBounds(true);
     })
     this.physics.add.collider(this.#player, this.#roomGroup, (player: any, room: any) => {
-      console.log("hit")
+      window.location.href = "https://www.google.com"
     });
   }
   setAnimations() {
@@ -126,3 +127,4 @@ export class GameScene extends Phaser.Scene {
   }
 
 }
+
