@@ -4,14 +4,8 @@ import { coinbaseWallet, injected, metaMask } from "wagmi/connectors";
 
 export const config = createConfig({
   chains: [avalancheFuji],
-  connectors: [injected(), coinbaseWallet(), metaMask()],
+  connectors: [metaMask()],
   transports: {
     [avalancheFuji.id]: http(),
   },
 });
-
-declare module "wagmi" {
-  interface Register {
-    config: typeof config;
-  }
-}
