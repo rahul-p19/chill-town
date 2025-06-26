@@ -1,13 +1,14 @@
 "use client";
 
-import {
-    SignInButton,
-    SignUpButton,
-    SignOutButton,
-    SignedIn,
-    SignedOut,
-    UserButton,
-  } from '@clerk/nextjs'
+import { User } from 'lucide-react';
+// import {
+//     SignInButton,
+//     SignUpButton,
+//     SignOutButton,
+//     SignedIn,
+//     SignedOut,
+//     UserButton,
+//   } from '@clerk/nextjs'
 import Link from 'next/link';
 
 export function Appbar(){
@@ -17,20 +18,20 @@ export function Appbar(){
             <Link href={"/marketplace"} className='border-yellow-300 rounded-full px-6 py-2 border hover:border-orange-400 transition-colors duration-150'>
                 Marketplace
             </Link>
-            <SignedOut>
+            <div>
                 <div className='flex gap-x-6 font-pixelify'>
                     <div className='border-yellow-300 rounded-full px-6 py-2 border hover:border-orange-400 transition-colors duration-150'>
-                    <SignInButton />
+                    <button>Sign In</button>
                     </div>
                     <div className='border-yellow-300 rounded-full px-6 py-2 border hover:border-orange-400 transition-colors duration-150'>
-                    <SignUpButton />
+                    <button>Sign Up</button>
                     </div>
                 </div>
-            </SignedOut>
-            <SignedIn>
-                     <UserButton />
-                     <SignOutButton />
-            </SignedIn>
+            </div>
+            <div>
+                     <User />
+                     <button>Sign Out</button>
+            </div>
         </div>
     </div>
 }

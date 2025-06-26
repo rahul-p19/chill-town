@@ -8,6 +8,7 @@ const Page = () => {
 			const Phaser = await import("phaser");
 			const { GameConfiguration } = await import("@/Game/config");
 			const game = new Phaser.Game(GameConfiguration);
+			if(game) console.log("Loading Game");
 		}
 		initGame();
 	}, []);

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, use } from "react";
 import io from "socket.io-client";
 import Peer, { SignalData } from "simple-peer";
 import { Camera, CameraOff, Mic, MicOff, Maximize } from "lucide-react";
@@ -23,7 +23,7 @@ const Video = (props: { peer: Peer.Instance }) => {
     props.peer.on("stream", (stream: MediaStream) => {
       if (ref.current) ref.current.srcObject = stream;
     });
-  }, []);
+  }, [props.peer]);
   
   const toggleFullScreen = () => {
     if (ref.current) {
@@ -58,7 +58,7 @@ const Video = (props: { peer: Peer.Instance }) => {
 // 	width: (2 * window.innerWidth) / 5,
 // };
 
-const Room = ({ params } : {params: {roomId: string}}) => {
+export default function Room ({params}:{params:Promise<{roomId:string}>}) {
   const [peers, setPeers] = useState<Peer.Instance[]>([]);
   const [sharingScreen, setSharingScreen] = useState<boolean>(false);
   const [toggleMicText, setToggleMicText] = useState<string>("Turn off mic");
@@ -68,7 +68,7 @@ const Room = ({ params } : {params: {roomId: string}}) => {
   const userVideo = useRef<HTMLVideoElement>(null);
   const peersRef = useRef<{ peerID: string; peer: Peer.Instance }[]>([]);
   const currentStreamRef = useRef<MediaStream>(null);
-  const roomId = params.roomId;
+  const roomId = use(params);
 
   useEffect(() => {
     videoConstraints = {
@@ -151,7 +151,7 @@ const Room = ({ params } : {params: {roomId: string}}) => {
       });
     };
     connectToSignallingServer();
-  }, []);
+  }, [roomId]);
 
   function createPeer(
     userToSignal: string,
@@ -404,5 +404,3 @@ const Room = ({ params } : {params: {roomId: string}}) => {
     </div>
   );
 };
-
-export default Room;

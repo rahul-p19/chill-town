@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.13.0",
     "@radix-ui/react-separator": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.2",
     "@tailwindcss/oxide-linux-x64-gnu": "^4.1.3",
@@ -23,13 +22,12 @@
     "lucide-react": "^0.487.0",
     "next": "15.2.4",
     "phaser": "^3.88.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "simple-peer": "^9.11.1",
     "socket.io-client": "^4.8.1",
     "tailwind-merge": "^3.1.0",
-    "tw-animate-css": "^1.2.5",
-    "wagmi": "^2.14.16"
+    "tw-animate-css": "^1.2.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

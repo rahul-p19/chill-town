@@ -140,7 +140,15 @@ export class GameScene extends Phaser.Scene {
 
       if (state.players) {
         // Process all players in the current state
-        state.players.forEach((player: any, sessionId: string) => {
+        interface PlayerState {
+          x?: number;
+          y?: number;
+          animation?: string;
+        }
+
+        //interface PlayersMap extends Map<string, PlayerState> {}
+
+        state.players.forEach((player: PlayerState, sessionId: string) => {
           // Skip our own player
           if (sessionId === this.gameRoom?.sessionId) return;
 
@@ -262,9 +270,9 @@ export class GameScene extends Phaser.Scene {
     const roomTileSet = map.addTilesetImage('truck', 'room');
 
     // Create layers
-    const background = map.createLayer('background', botanyTileSet!);
-    const rocks = map.createLayer('rocks', botanyTileSet!);
-    const trees = map.createLayer('trees', botanyTileSet!);
+    // const background = map.createLayer('background', botanyTileSet!);
+    // const rocks = map.createLayer('rocks', botanyTileSet!);
+    // const trees = map.createLayer('trees', botanyTileSet!);
     const decorations = map.createLayer('decorations', roomTileSet!);
     const collision = map.createLayer('collision-map', botanyTileSet!);
 
@@ -321,10 +329,14 @@ export class GameScene extends Phaser.Scene {
       modiMarketplace.setCollideWorldBounds(true);
     });
     // Room collision that redirects to a new page
-    this.physics.add.collider(this.#player, this.#roomGroup, (player: any, room: any) => {
+    this.physics.add.collider(this.#player, this.#roomGroup, 
+      // (player: any, room: any) => {
+      () => {
       window.location.href = "room/test";
     });
-    this.physics.add.collider(this.#player, this.#marketplaceGroup, (player: any, marketplace: any) => {
+    this.physics.add.collider(this.#player, this.#marketplaceGroup, 
+      // (player: any, marketplace: any) => {
+      () => {
       window.location.href = "marketplace";
     });
 
@@ -332,13 +344,13 @@ export class GameScene extends Phaser.Scene {
     this.physics.add.collider(
       this.#player,
       this.#roomGroup,
-      (player: any, room: any) => {
+      (player, room) => {
         console.log("hit");
 
         if (this.gameRoom) {
           this.gameRoom.send("roomCollision", {
-            roomId: room.getData("id") || "unknown",
-            playerPosition: { x: player.x, y: player.y },
+            roomId: (room as Phaser.GameObjects.GameObject).getData?.("id") || "unknown",
+            playerPosition: { x: (player as Phaser.GameObjects.Sprite).x, y: (player as Phaser.GameObjects.Sprite).y },
           });
         }
       }
@@ -353,7 +365,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   setAnimations() {
-    let rep = 1;
+    const rep = 1;
 
     // Idle animations
     this.anims.create({
@@ -464,7 +476,7 @@ export class GameScene extends Phaser.Scene {
 
     // Update chat UI with current chat partners
     if (this.#chatComponent && this.#chatComponent.visible) {
-      this.#chatComponent.updatePartnersList(Array.from(this.#activeChatPartners.values()));
+      this.#chatComponent.updatePartnersList();
     }
   }
 

@@ -2,7 +2,7 @@ import { PLAYER_ANIMATION_KEYS } from "@/Game/common/assets";
 import { DIRECTIONS, Position } from "@/Game/common/types";
 import { isPhysicsArcadeBody } from "@/Game/common/utils";
 import { KeyboardComponent } from "@/Game/components/input/keyboard-component";
-import { Client, Room as ColyseusRoom } from "colyseus.js";
+import { Room as ColyseusRoom } from "colyseus.js";
 
 export type PlayerConfig = {
   scene: Phaser.Scene;

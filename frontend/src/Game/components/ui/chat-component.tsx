@@ -122,7 +122,7 @@
 //   }
 
 import React, { useState, useEffect, useRef } from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, Root } from "react-dom/client";
 import type { GameScene } from "@/Game/Scenes/Game-Scene";
 
 // React component for the chat UI
@@ -202,7 +202,7 @@ export class ChatComponent {
   private scene: Phaser.Scene;
   private messages: { sender: string; text: string }[] = [];
   public visible: boolean = true;
-  private reactRoot: any;
+  private reactRoot: Root;
   private rootElement: HTMLDivElement;
 
   constructor(scene: Phaser.Scene) {
@@ -260,7 +260,7 @@ export class ChatComponent {
     }
   }
 
-  updatePartnersList(partners: any[]) {
+  updatePartnersList() {
     // This could be expanded to show partners in the UI
     this.renderReactComponent();
   }
