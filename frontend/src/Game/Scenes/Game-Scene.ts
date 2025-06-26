@@ -9,6 +9,8 @@ import { ChatComponent } from "../components/ui/chat-component";
 import { Client, Room as ColyseusRoom } from "colyseus.js";
 import { MarketPlace } from "../game-objects/Marketplace/marketplace";
 
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:2567";
+
 export class GameScene extends Phaser.Scene {
   #player!: Player;
   #marketplace!: MarketPlace;
@@ -71,7 +73,7 @@ export class GameScene extends Phaser.Scene {
       return;
     }
 
-    this.#client = new Client("ws://localhost:2567");
+    this.#client = new Client(BACKEND_URL);
 
     try {
       this.gameRoom = await this.#client.joinOrCreate("my_room");

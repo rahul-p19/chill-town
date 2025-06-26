@@ -7,6 +7,8 @@ import { Camera, CameraOff, Mic, MicOff, Maximize } from "lucide-react";
 const streamMap = new Map();
 let videoConstraints: { height: number; width: number };
 
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:2567";
+
 const iceServers = [
   { urls: "stun:stun.l.google.com:19302" }, // Public STUN server
   { urls: "stun:stun1.l.google.com:19302" }, // Backup STUN server
@@ -39,10 +41,10 @@ const Video = (props: { peer: Peer.Instance }) => {
 
   return (
     <div className="relative">
-      <video playsInline autoPlay ref={ref} className="border rounded-lg w-full" />
+      <video playsInline autoPlay ref={ref} className=" rounded-lg w-full" />
       <button 
         onClick={toggleFullScreen}
-        className="absolute top-2 left-2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 rounded-full shadow-md transition-all duration-200"
+        className="absolute top-2 left-2 hover:bg-zinc-800 bg-opacity-50 hover:bg-opacity-75 text-white p-2 rounded-full shadow-md transition-all duration-200"
         title="Fullscreen"
       >
         <Maximize size={16} />
@@ -60,14 +62,12 @@ const Room = ({ params } : {params: {roomId: string}}) => {
   const [peers, setPeers] = useState<Peer.Instance[]>([]);
   const [sharingScreen, setSharingScreen] = useState<boolean>(false);
   const [toggleMicText, setToggleMicText] = useState<string>("Turn off mic");
-  // const [roomId, setroomId] = useState<string>("");
   const [toggleCameraText, setToggleCameraText] =
     useState<string>("Turn off camera");
   const socketRef = useRef<SocketIOClient.Socket>(null);
   const userVideo = useRef<HTMLVideoElement>(null);
   const peersRef = useRef<{ peerID: string; peer: Peer.Instance }[]>([]);
   const currentStreamRef = useRef<MediaStream>(null);
-  // const params = useRouter();
   const roomId = params.roomId;
 
   useEffect(() => {
@@ -77,8 +77,7 @@ const Room = ({ params } : {params: {roomId: string}}) => {
     };
 
     const connectToSignallingServer = async () => {
-      socketRef.current = io.connect("http://localhost:2567");
-      // socketRef.current = io.connect("https://6znr3gxn-8000.inc1.devtunnels.ms");
+      socketRef.current = io.connect(BACKEND_URL);
 
       const stream = await navigator.mediaDevices.getUserMedia({
         video: videoConstraints,
@@ -330,7 +329,7 @@ const Room = ({ params } : {params: {roomId: string}}) => {
   );
 
   return (
-    <div className="h-screen w-full bg-gradient-to-br from-zinc-800 to-zinc-950 text-white p-6 font-sans">
+    <div className="h-screen w-full bg-black text-white px-6 font-sans">
       <h1 className="text-6xl font-bold text-center mb-8 text-amber-400 drop-shadow-lg">
 		<span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500 font-pixelify">
 			Welcome to Room
@@ -341,34 +340,34 @@ const Room = ({ params } : {params: {roomId: string}}) => {
         {remoteVideos}
       </div>
 
-      <div className="fixed bottom-5 right-5 flex flex-col items-end gap-y-3 z-50">
-        <div className="flex flex-col gap-y-3 font-sans">
+      <div className="fixed bottom-5 right-5 flex flex-col items-end z-50">
+        <div className="flex justify-around w-full font-sans">
           <button
             onClick={toggleMic}
-            className={`${toggleMicText === "Turn on mic" ? "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500" : "bg-red-500"}  text-white flex justify-center font-semibold px-6 py-2 rounded-full shadow-md hover:scale-105 transition-transform duration-200`}
+            className={`${toggleMicText === "Turn off mic" ? "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500" : "bg-red-500"}  text-white flex justify-center font-semibold p-2 rounded-full aspect-square w-fit shadow-md hover:scale-105 transition-transform duration-200`}
           >
-			{toggleMicText === "Turn off mic" ? <MicOff /> : <Mic />}
+			{toggleMicText === "Turn off mic" ? <Mic /> : <MicOff />}
           </button>
           <button
             onClick={toggleCamera}
-            className={`${toggleCameraText === "Turn on camera" ? "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500" : "bg-red-500"} flex justify-center text-white font-semibold px-6 py-2 rounded-full shadow-md hover:scale-105 transition-transform duration-200`}
+            className={`${toggleCameraText === "Turn off camera" ? "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500" : "bg-red-500"} flex justify-center text-white font-semibold p-2 rounded-full aspect-square w-fit shadow-md hover:scale-105 transition-transform duration-200`}
           >
-			{toggleCameraText === "Turn on camera" ? <Camera /> : <CameraOff />}
+			{toggleCameraText === "Turn on camera" ? <CameraOff /> : <Camera />}
             {/* {toggleCameraText} */}
           </button>
           {sharingScreen ? (
             <button
               onClick={stopSharingScreen}
-              className="bg-gradient-to-r from-red-500 to-yellow-500 hover:from-yellow-500 hover:to-red-500 text-white font-semibold px-6 py-2 rounded-full shadow-md hover:scale-105 transition-transform duration-200"
+              className="bg-gradient-to-r from-red-500 to-yellow-500 hover:from-yellow-500 hover:to-red-500 text-white font-semibold p-2 aspect-square w-fit rounded-full shadow-md hover:scale-105 transition-transform duration-200"
             >
-              🛑 Stop Sharing Screen
+              🛑
             </button>
           ) : (
             <button
               onClick={shareScreen}
-              className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-blue-500 hover:to-green-500 text-white font-semibold px-6 py-2 rounded-full shadow-md hover:scale-105 transition-transform duration-200"
+              className="bg-red-500 text-white font-semibold p-2 aspect-square w-fit rounded-full shadow-md hover:scale-105 transition-transform duration-200"
             >
-              🎥 Share Screen
+              🎥
             </button>
           )}
         </div>
@@ -379,7 +378,7 @@ const Room = ({ params } : {params: {roomId: string}}) => {
             ref={userVideo}
             autoPlay
             playsInline
-            className="rounded-xl mt-4 h-[30vh] border-4 border-amber-500 shadow-xl"
+            className="rounded-xl mt-4 h-[30vh] shadow-xl"
           />
           <button 
             onClick={() => {
@@ -395,7 +394,7 @@ const Room = ({ params } : {params: {roomId: string}}) => {
                 }
               }
             }}
-            className="absolute top-2 left-2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 rounded-full shadow-md transition-all duration-200"
+            className="absolute top-6 left-2 hover:cursor-pointer hover:bg-zinc-800 bg-opacity-50 hover:bg-opacity-75 text-white p-2 rounded-full shadow-md transition-all duration-200"
             title="Fullscreen"
           >
             <Maximize size={16} />
