@@ -4,6 +4,11 @@ import { Server as socketServer } from "socket.io";
 import { WebSocketTransport } from "@colyseus/ws-transport";
 import express from "express";
 import cors from "cors";
+import { Redis } from "ioredis";
+import { createAdapter } from "@socket.io/redis-adapter";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 import { GameRoom } from "./rooms/MyRoom";
 
@@ -17,6 +22,7 @@ const corsOptions = {
     "http://localhost:4173",
     "https://6znr3gxn-4173.inc1.devtunnels.ms",
     "https://6znr3gxn-3000.inc1.devtunnels.ms",
+    `${process.env.FRONTEND_URL}`
   ],
   optionsSuccessStatus: 200,
   methods: ["GET", "POST"],
@@ -32,18 +38,44 @@ const server = new Server({
 
 server.define("my_room", GameRoom);
 
-const io = new socketServer(httpServer, {
-  cors: {
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:4173",
-      "https://6znr3gxn-4173.inc1.devtunnels.ms",
-      "https://6znr3gxn-3000.inc1.devtunnels.ms",
-    ],
-    optionsSuccessStatus: 200,
-    methods: ["GET", "POST"],
-  },
-});
+// using redis pub sub if available, otherwise creating normal socket io server because probably will have to deploy on free serverless
+
+const REDIS_URL = process.env.REDIS_URL;
+
+let io;
+
+if (REDIS_URL) {
+  const pubClient = new Redis();
+  const subClient = pubClient.duplicate();
+  
+  io = new socketServer(httpServer, {
+    cors: {
+      origin: [
+        "http://localhost:3000",
+        "http://localhost:4173",
+        "https://6znr3gxn-4173.inc1.devtunnels.ms",
+        "https://6znr3gxn-3000.inc1.devtunnels.ms",
+        `${process.env.FRONTEND_URL}`
+      ],
+      optionsSuccessStatus: 200,
+      methods: ["GET", "POST"],
+    },
+    adapter: createAdapter(pubClient, subClient),
+  });
+} else {
+  io = new socketServer(httpServer, {
+    cors: {
+      origin: [
+        "http://localhost:3000",
+        "http://localhost:4173",
+        "https://6znr3gxn-4173.inc1.devtunnels.ms",
+        "https://6znr3gxn-3000.inc1.devtunnels.ms",
+      ],
+      optionsSuccessStatus: 200,
+      methods: ["GET", "POST"],
+    }
+  });
+}
 
 const rooms: { [roomID: string]: string[] } = {};
 const socketToRoom: { [socketID: string]: string } = {};
