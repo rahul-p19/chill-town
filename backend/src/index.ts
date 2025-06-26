@@ -70,6 +70,7 @@ if (REDIS_URL) {
         "http://localhost:4173",
         "https://6znr3gxn-4173.inc1.devtunnels.ms",
         "https://6znr3gxn-3000.inc1.devtunnels.ms",
+        `${process.env.FRONTEND_URL}`
       ],
       optionsSuccessStatus: 200,
       methods: ["GET", "POST"],
