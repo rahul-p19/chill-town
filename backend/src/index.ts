@@ -22,6 +22,7 @@ const corsOptions = {
     "http://localhost:4173",
     "https://6znr3gxn-4173.inc1.devtunnels.ms",
     "https://6znr3gxn-3000.inc1.devtunnels.ms",
+    "https://chill-town.vercel.app",
     `${process.env.FRONTEND_URL}`
   ],
   optionsSuccessStatus: 200,
@@ -55,6 +56,7 @@ if (REDIS_URL) {
         "http://localhost:4173",
         "https://6znr3gxn-4173.inc1.devtunnels.ms",
         "https://6znr3gxn-3000.inc1.devtunnels.ms",
+	"https://chill-town.vercel.app",
         `${process.env.FRONTEND_URL}`
       ],
       optionsSuccessStatus: 200,
@@ -70,6 +72,7 @@ if (REDIS_URL) {
         "http://localhost:4173",
         "https://6znr3gxn-4173.inc1.devtunnels.ms",
         "https://6znr3gxn-3000.inc1.devtunnels.ms",
+	"https://chill-town.vercel.app",
         `${process.env.FRONTEND_URL}`
       ],
       optionsSuccessStatus: 200,
