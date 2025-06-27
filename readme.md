@@ -1,4 +1,4 @@
- ChillTown
+# ChillTown
 
 **ChillTown** is a gamified entertainment platform combining real-time group video calling with an interactive 2D metaverse. It offers a unique space for virtual hangouts, live collaboration, and engaging social experiences.
 
