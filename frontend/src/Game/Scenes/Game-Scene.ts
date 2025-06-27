@@ -372,7 +372,7 @@ export class GameScene extends Phaser.Scene {
       key: PLAYER_ANIMATION_KEYS.IDLE_DOWN,
       frames: this.anims.generateFrameNumbers(ASSET_KEYS.PLAYER, {
         start: 0,
-        end: 0,
+        end: 2,
       }),
       frameRate: 8,
       repeat: 1,
