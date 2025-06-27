@@ -446,7 +446,7 @@ export class GameScene extends Phaser.Scene {
       key: ROOM_ANIMATION_KEYS.ANIMATE,
       frames: this.anims.generateFrameNumbers(ASSET_KEYS.ROOM, {
         start: 0,
-        end: 6,
+        end: 5,
       }),
       frameRate: 8,
       repeat: rep,
