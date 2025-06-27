@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 const avatars = [
   "https://ipfs.io/ipfs/bafkreihlaw7zoxykg2pbbe332a6pp74fjh7j7hb25ehz6nfeukenntqwgy",
@@ -11,7 +12,14 @@ const JoinRoom = () => {
   const [selectedAvatar, setSelectedAvatar] = useState(avatars[0]);
 
   const joinRoom = () => {
-    if (!roomID) return alert("Please enter a room ID!");
+    if(window && window.innerWidth<=1000){
+      toast("Sorry! We do not support mobile devices yet.");
+      return;
+    }
+    if (!roomID){
+      toast("Please enter a room ID!");
+      return;
+    }
     // You can store the avatar in localStorage or state mgmt if needed later
     localStorage.setItem("selectedAvatar", selectedAvatar);
     window.location.href = 'game';
@@ -19,14 +27,15 @@ const JoinRoom = () => {
 
   return (
     <div className="min-h-[90vh] flex flex-col items-center justify-center bg-black text-white px-4 py-10 font-pixelify">
-      <h1 className="text-6xl font-extrabold mb-10 drop-shadow-lg">
-        <span className=" bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-red-500">
+      <Toaster />
+      <h1 className="text-6xl font-extrabold mb-10 drop-shadow-lg w-fit">
+        <span className="text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-red-500">
           Join the Arena
           </span>
       </h1>
 
       <div className="bg-gradient-to-br from-zinc-800/50 to-yellow-950/50 p-8 rounded-2xl shadow-lg w-full max-w-xl text-center font-sans">
-        <label className="font-bold mb-3 block text-xl">Choose Your Avatar</label>
+        <label className="font-bold mb-3 block text-xl text-center">Choose Your Avatar</label>
         <div className="flex justify-around gap-4 my-10 h-full w-full">
           {avatars.map((avatar) => (
             // eslint-disable-next-line @next/next/no-img-element
