@@ -337,7 +337,7 @@ export class GameScene extends Phaser.Scene {
     this.physics.add.collider(this.#player, this.#marketplaceGroup, 
       // (player: any, marketplace: any) => {
       () => {
-      window.location.href = "marketplace";
+      window.location.href = "game";
     });
 
     // Notify server about room collision
