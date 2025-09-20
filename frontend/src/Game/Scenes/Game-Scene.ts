@@ -270,9 +270,9 @@ export class GameScene extends Phaser.Scene {
     const roomTileSet = map.addTilesetImage('truck', 'room');
 
     // Create layers
-    // const background = map.createLayer('background', botanyTileSet!);
-    // const rocks = map.createLayer('rocks', botanyTileSet!);
-    // const trees = map.createLayer('trees', botanyTileSet!);
+    map.createLayer('background', botanyTileSet!);
+    map.createLayer('rocks', botanyTileSet!);
+    map.createLayer('trees', botanyTileSet!);
     const decorations = map.createLayer('decorations', roomTileSet!);
     const collision = map.createLayer('collision-map', botanyTileSet!);
 
@@ -329,16 +329,16 @@ export class GameScene extends Phaser.Scene {
       modiMarketplace.setCollideWorldBounds(true);
     });
     // Room collision that redirects to a new page
-    this.physics.add.collider(this.#player, this.#roomGroup, 
+    this.physics.add.collider(this.#player, this.#roomGroup,
       // (player: any, room: any) => {
       () => {
-      window.location.href = "room/test";
-    });
-    this.physics.add.collider(this.#player, this.#marketplaceGroup, 
+        window.location.href = "room/test";
+      });
+    this.physics.add.collider(this.#player, this.#marketplaceGroup,
       // (player: any, marketplace: any) => {
       () => {
-      window.location.href = "marketplace";
-    });
+        window.location.href = "marketplace";
+      });
 
     // Notify server about room collision
     this.physics.add.collider(
